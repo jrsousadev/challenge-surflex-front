@@ -14,12 +14,12 @@ export const withSSRAuth = <P extends { [key: string]: any }>(
   return async (
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P> | any> => {
-    const { ["physioSystem.token"]: token } = parseCookies(context);
+    const { ["challengeSurflex.token"]: token } = parseCookies(context);
 
     if (!token) {
       return {
         redirect: {
-          destination: "/login",
+          destination: "/",
           permanent: false,
         },
       };
@@ -33,7 +33,7 @@ export const withSSRAuth = <P extends { [key: string]: any }>(
 
         return {
           redirect: {
-            destination: "/login",
+            destination: "/",
             permanent: false,
           },
         };

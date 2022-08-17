@@ -35,7 +35,7 @@ export const signOut = (broadcast = true) => {
     authChannel.postMessage("signOut");
   }
 
-  Router.push("/login");
+  Router.push("/");
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           signOut(false);
           break;
         case "signIn":
-          Router.push("/dashboard");
+          Router.push("/");
           break;
         default:
           break;
@@ -67,8 +67,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const userId = await getInfosDecodedToken(token);
 
         await getUser({ id: userId })
-          .then((response) => {
-            const { id, name, created_at } = response.user;
+          .then((user) => {
+            const { id, name, created_at } = user;
 
             setUser({
               id,
@@ -76,9 +76,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
               created_at,
             });
           })
-          .catch(() => {
-            signOut();
-          });
+          .catch(() => {});
       }
     })();
   }, []);
