@@ -12,7 +12,7 @@ type CardMedia = {
 
 export const CardMediaComponent = styled("div")<CardMedia>`
   width: 100%;
-  height: 300px;
+  height: 400px;
   background-image: url(${(props) => props.img});
   background-position: center;
   background-repeat: no-repeat;
