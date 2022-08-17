@@ -5,7 +5,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
@@ -25,6 +24,8 @@ import { Character } from "../domain/Character";
 import { CardCharacter } from "../components/Card";
 import { getCharactersProd } from "../services/characterProdApi/getCharactersProd";
 import Head from "next/head";
+import { ModalCharacter } from "../components/ModalCharacter";
+import useDisclosure from "../hooks/useDiscloure";
 
 type IFilterData = {
   name: string;
@@ -48,6 +49,12 @@ export default function ListCharacters({
   const [listCharactersMain, setListCharactersMain] =
     useState<Character[]>(listCharacters);
 
+  const [characterSelected, setCharacterSelected] = useState<
+    Character | undefined
+  >();
+
+  const { isOpen, handleClose, handleOpen } = useDisclosure();
+
   const { register, getValues } = useForm<IFilterData>({
     resolver: yupResolver(filterSchema),
   });
@@ -68,11 +75,23 @@ export default function ListCharacters({
     setListCharactersMain(response.results);
   };
 
+  const handleOpenModalAndSelectCharacter = (character: Character) => {
+    setCharacterSelected(character);
+    handleOpen();
+  };
+
   return (
     <>
       <Head>
         <title>Lista de personagens</title>
       </Head>
+
+      <ModalCharacter
+        character={characterSelected}
+        closeModal={handleClose}
+        modalIsOpen={isOpen}
+      />
+
       <Container>
         <Header />
 
@@ -108,7 +127,13 @@ export default function ListCharacters({
 
           <ContainerCards>
             {listCharactersMain.map((character: Character) => (
-              <CardCharacter key={character.id} character={character} />
+              <CardCharacter
+                key={character.id}
+                character={character}
+                onHandleSelectCharacter={() =>
+                  handleOpenModalAndSelectCharacter(character)
+                }
+              />
             ))}
           </ContainerCards>
         </Content>
