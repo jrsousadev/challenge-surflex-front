@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { GetServerSideProps } from "next";
+import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
 
 type RegisterData = {
   name: string;
@@ -83,3 +85,11 @@ export default function Register() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuthLogged(
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
+);

@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 export function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const isAuthenticated = false;
+  const { user, isAuthenticated } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -74,6 +74,7 @@ export function Header() {
               >
                 <MenuItem>Sair</MenuItem>
               </Menu>
+              {user?.name}
             </>
           )}
         </div>

@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import useAuth from "../../hooks/useAuth";
 
 import { Container, FormWrapper } from "../../styles/pages/login";
 import {
@@ -11,6 +12,9 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
+import { GetServerSideProps } from "next";
 
 type LoginData = {
   name: string;
@@ -26,6 +30,7 @@ const loginSchema = yup
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
   const {
     register,
@@ -39,8 +44,9 @@ export default function Login() {
     setLoading(true);
 
     try {
+      await signIn(data);
     } catch (err) {
-      console.log(err);
+      toast.error("Email ou senha incorreta");
     } finally {
       setLoading(false);
     }
@@ -89,3 +95,11 @@ export default function Login() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuthLogged(
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
+);

@@ -7,6 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { GlobalStyle } from "../styles/global";
 import "react-toastify/dist/ReactToastify.css";
 import createEmotionCache from "../utils/createEmotionCache";
+import { AuthProvider } from "../contexts/AuthContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -19,15 +20,17 @@ export const MyApp = (props: MyAppProps) => {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <CssBaseline />
-      <GlobalStyle />
-      <div style={{ position: "absolute", top: "0", right: "0" }}>
-        <ToastContainer />
-      </div>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <CssBaseline />
+        <GlobalStyle />
+        <div style={{ position: "absolute", top: "0", right: "0" }}>
+          <ToastContainer />
+        </div>
+        <Component {...pageProps} />
+      </AuthProvider>
     </CacheProvider>
   );
 };
