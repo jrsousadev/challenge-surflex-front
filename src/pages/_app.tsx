@@ -3,12 +3,12 @@ import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import CssBaseline from "@mui/material/CssBaseline";
 import { GlobalStyle } from "../styles/global";
 import "react-toastify/dist/ReactToastify.css";
-import createEmotionCache from "../utils/createEmotionCache";
 import { AuthProvider } from "../contexts/AuthContext";
 
+import createEmotionCache from "../utils/createEmotionCache";
+import CssBaseline from "@mui/material/CssBaseline";
 const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {

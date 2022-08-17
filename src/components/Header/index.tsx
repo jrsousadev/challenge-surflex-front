@@ -1,4 +1,5 @@
 import { AccountCircle } from "@mui/icons-material";
+import { useState } from "react";
 import {
   AppBar,
   Button,
@@ -9,12 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 export function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, signOut } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -47,6 +47,7 @@ export function Header() {
           )}
           {isAuthenticated && (
             <>
+              {user?.name}
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -72,9 +73,8 @@ export function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem>Sair</MenuItem>
+                <MenuItem onClick={signOut}>Sair</MenuItem>
               </Menu>
-              {user?.name}
             </>
           )}
         </div>

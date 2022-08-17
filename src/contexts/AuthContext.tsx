@@ -35,7 +35,7 @@ export const signOut = (broadcast = true) => {
     authChannel.postMessage("signOut");
   }
 
-  Router.push("/");
+  Router.push("/login");
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -76,7 +76,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
               created_at,
             });
           })
-          .catch(() => {});
+          .catch(() => {
+            signOut();
+          });
       }
     })();
   }, []);

@@ -13,6 +13,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { GetServerSideProps } from "next";
 import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
+import Head from "next/head";
+import { toast } from "react-toastify";
+import { createUser } from "../../services/userApi/user";
 
 type RegisterData = {
   name: string;
@@ -40,11 +43,18 @@ export default function Register() {
   async function handleRegister(data: RegisterData) {
     setLoading(true);
 
-    //TODO
+    try {
+      await createUser(data);
+    } catch (err) {
+      toast.error("Nome de usuário ja existente");
+    }
   }
 
   return (
     <>
+      <Head>
+        <title>Registrar</title>
+      </Head>
       <Container>
         <FormWrapper as="form" onSubmit={handleSubmit(handleRegister)}>
           <Typography variant="h3">Challenge Surflex</Typography>

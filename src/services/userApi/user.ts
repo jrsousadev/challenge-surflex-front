@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { GetCorrectApi } from "../../utils/GetCorrectApi";
-import { AUTH_USER, GET_USER } from "./userRoutesApi";
+import { AUTH_USER, CREATE_USER, GET_USER } from "./userRoutesApi";
 import { api as ApiClient } from "../apiClient";
 
 interface ICreateAuthenticateUser {
@@ -31,6 +31,21 @@ export const getUser = async ({ ctx, id }: IGetUser) => {
 
   try {
     const response = await api.get(GET_USER(id));
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+interface ICreateUser {
+  name: string;
+  password: string;
+}
+
+export const createUser = async ({ name, password }: ICreateUser) => {
+  const data = { name, password };
+  try {
+    const response = await ApiClient.post(CREATE_USER, data);
     return response.data;
   } catch (error) {
     return error;

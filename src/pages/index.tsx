@@ -24,6 +24,7 @@ import { Header } from "../components/Header";
 import { Character } from "../domain/Character";
 import { CardCharacter } from "../components/Card";
 import { getCharactersProd } from "../services/characterProdApi/getCharactersProd";
+import Head from "next/head";
 
 type IFilterData = {
   name: string;
@@ -69,6 +70,9 @@ export default function ListCharacters({
 
   return (
     <>
+      <Head>
+        <title>Lista de personagens</title>
+      </Head>
       <Container>
         <Header />
 

@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 type LoginData = {
   name: string;
@@ -54,6 +55,9 @@ export default function Login() {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <Container>
         <FormWrapper as="form" onSubmit={handleSubmit(handleLogin)}>
           <Typography variant="h3">Challenge Surflex</Typography>
