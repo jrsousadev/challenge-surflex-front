@@ -13,7 +13,7 @@ Este projeto é um sistema que exibe a listagem de personagens da API do "Rick A
 
 #### Filtrar personagens por name e espécie
 
-![image](file:///home/sousadev/Imagens/Capturas%20de%20tela/Captura%20de%20tela%20de%202022-08-18%2011-41-31.png);
+![image](https://user-images.githubusercontent.com/92350736/185425149-ab0bef59-f5cb-4ddc-a3ad-0b94eb6013de.png)
 
 ### Iniciando o Projeto
 
