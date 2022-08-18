@@ -17,7 +17,7 @@ export const createAuthenticationUser = async ({
     const response = await ApiClient.post(AUTH_USER, data);
     return response.data;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
@@ -32,8 +32,8 @@ export const getUser = async ({ ctx, id }: IGetUser) => {
   try {
     const response = await api.get(GET_USER(id));
     return response.data;
-  } catch (error) {
-    return error;
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -47,7 +47,7 @@ export const createUser = async ({ name, password }: ICreateUser) => {
   try {
     const response = await ApiClient.post(CREATE_USER, data);
     return response.data;
-  } catch (error) {
-    return error;
+  } catch (err) {
+    throw err;
   }
 };

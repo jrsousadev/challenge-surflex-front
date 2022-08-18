@@ -54,7 +54,7 @@ export const getAllCharacter = async ({
     const response = await api.get(GET_ALL_CHARACTERS(name, species));
     return response.data;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
@@ -67,6 +67,6 @@ export const deleteCharacter = async ({ id }: IDeleteCharacter) => {
     const response = await ApiClient.delete(DELETE_CHARACTER(id));
     return response.data;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
