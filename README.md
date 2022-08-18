@@ -9,6 +9,14 @@ Este projeto é um sistema que exibe a listagem de personagens da API do "Rick A
 - Next
 - MUI
 
+### Link do repositório da API (Back-end)
+
+🔗 [Back-end](https://github.com/jrsousadev/challenge-surflex-api)
+
+### Deploy 
+
+🔗 [Conhecer aplicação](https://challenge-surflex-front.herokuapp.com/)
+
 ### Recursos
 
 #### Projeto Mobile / Desktop
@@ -37,11 +45,3 @@ yarn install
 // and
 yarn start
 ```
-
-### Link do repositório da API (Back-end)
-
-🔗 [Back-end](https://github.com/jrsousadev/challenge-surflex-api)
-
-### Deploy 
-
-🔗 [Conhecer aplicação](https://challenge-surflex-front.herokuapp.com/)
