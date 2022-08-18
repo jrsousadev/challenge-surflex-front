@@ -1,5 +1,6 @@
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
+import { ToolbarMenu } from "./styles";
 import {
   AppBar,
   Button,
@@ -26,10 +27,33 @@ export function Header() {
 
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Challenge Surflex
-        </Typography>
+      <ToolbarMenu>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridGap: "10px",
+            placeItems: "center",
+          }}
+        >
+          <Link href="/" passHref>
+            <Typography variant="h6" component="div" sx={{ cursor: "pointer" }}>
+              Challenge Surflex
+            </Typography>
+          </Link>
+
+          {isAuthenticated && (
+            <Link href="/listFavorites" passHref>
+              <Button
+                variant="outlined"
+                style={{ background: "#ffffff", color: "#000" }}
+              >
+                Minha lista de favoritos
+              </Button>
+            </Link>
+          )}
+        </div>
+
         <div>
           {!isAuthenticated && (
             <Link href="/login" passHref>
@@ -78,7 +102,7 @@ export function Header() {
             </>
           )}
         </div>
-      </Toolbar>
+      </ToolbarMenu>
     </AppBar>
   );
 }

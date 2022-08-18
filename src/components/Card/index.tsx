@@ -17,6 +17,7 @@ interface CardCharacterProps {
   character: Character;
   onHandleSelectCharacter: () => void;
   onHandleAddedFavorite: () => void;
+  onHandleRemoveFavorite: () => void;
   isFavorite: boolean;
 }
 
@@ -25,6 +26,7 @@ export function CardCharacter({
   isFavorite,
   onHandleSelectCharacter,
   onHandleAddedFavorite,
+  onHandleRemoveFavorite,
 }: CardCharacterProps) {
   const [charIsFavorite, setCharIsFavorite] = useState(isFavorite);
   const [loading, setIsLoading] = useState(false);
@@ -34,7 +36,7 @@ export function CardCharacter({
       onHandleAddedFavorite();
       setCharIsFavorite(!isFavorite);
     } else {
-      await deleteCharacter({ id: Number(character.id) });
+      onHandleRemoveFavorite();
       setCharIsFavorite(!isFavorite);
     }
   };
