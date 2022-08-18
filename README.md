@@ -9,6 +9,12 @@ Este projeto é um sistema que exibe a listagem de personagens da API do "Rick A
 - Next
 - MUI
 
+### Recursos
+
+#### Filtrar personagens por name e espécie
+
+![image](file:///home/sousadev/Imagens/Capturas%20de%20tela/Captura%20de%20tela%20de%202022-08-18%2011-41-31.png);
+
 ### Iniciando o Projeto
 
 **1-** Clone repository.
