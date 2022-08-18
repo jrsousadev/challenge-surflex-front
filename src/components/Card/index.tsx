@@ -36,10 +36,10 @@ export function CardCharacter({
   const handleAddedOrRemoveCharFavorite = async () => {
     if (!charIsFavorite) {
       onHandleAddedFavorite();
-      setCharIsFavorite(!isFavorite);
+      setCharIsFavorite(true);
     } else {
       onHandleRemoveFavorite();
-      setCharIsFavorite(!isFavorite);
+      setCharIsFavorite(false);
     }
   };
 

@@ -30,7 +30,6 @@ interface ICreateCharacter {
 export const createCharacter = async (data: ICreateCharacter) => {
   try {
     const response = await ApiClient.post(CREATE_CHARACTER, data);
-    console.log(response);
     return response.data;
   } catch (err) {
     throw err;
