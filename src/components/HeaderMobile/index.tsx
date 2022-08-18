@@ -25,6 +25,20 @@ export function HeaderMobile({ isOpen }: IHeaderMobileProps) {
           </ButtonMenu>
         </Link>
 
+        {!isAuthenticated && (
+          <Link href="/login" passHref>
+            <ButtonMenu variant="outlined">
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ cursor: "pointer" }}
+              >
+                Fazer login
+              </Typography>
+            </ButtonMenu>
+          </Link>
+        )}
+
         {isAuthenticated && (
           <>
             <Link href="/listFavorites" passHref>

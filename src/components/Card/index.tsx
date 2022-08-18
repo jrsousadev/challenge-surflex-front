@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { Character } from "../../domain/Character";
+import useAuth from "../../hooks/useAuth";
 import {
   createCharacter,
   deleteCharacter,
@@ -30,6 +31,7 @@ export function CardCharacter({
 }: CardCharacterProps) {
   const [charIsFavorite, setCharIsFavorite] = useState(isFavorite);
   const [loading, setIsLoading] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   const handleAddedOrRemoveCharFavorite = async () => {
     if (!charIsFavorite) {
@@ -43,16 +45,18 @@ export function CardCharacter({
 
   return (
     <ContainerCardMain>
-      <StarIconPosition>
-        <button
-          onClick={handleAddedOrRemoveCharFavorite}
-          disabled={loading}
-          style={{ background: "transparent", border: "none" }}
-        >
-          {charIsFavorite && <AiFillStar size={30} />}
-          {!charIsFavorite && <AiOutlineStar size={30} />}
-        </button>
-      </StarIconPosition>
+      {isAuthenticated && (
+        <StarIconPosition>
+          <button
+            onClick={handleAddedOrRemoveCharFavorite}
+            disabled={loading}
+            style={{ background: "transparent", border: "none" }}
+          >
+            {charIsFavorite && <AiFillStar size={30} />}
+            {!charIsFavorite && <AiOutlineStar size={30} />}
+          </button>
+        </StarIconPosition>
+      )}
       <CardComponent onClick={onHandleSelectCharacter}>
         <CardActionArea>
           <CardMediaComponent img={character.image} />

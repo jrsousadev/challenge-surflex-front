@@ -25,7 +25,7 @@ export function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user, isAuthenticated, signOut } = useAuth();
 
-  const { isOpen, handleToggle } = useDisclosure();
+  const { isOpen, handleToggle } = useDisclosure(false);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +67,7 @@ export function Header() {
             )}
           </ContainerDiv>
 
-          <div>
+          <ContainerLogout>
             {!isAuthenticated && (
               <Link href="/login" passHref>
                 <Button
@@ -83,7 +83,7 @@ export function Header() {
               </Link>
             )}
             {isAuthenticated && (
-              <ContainerLogout>
+              <>
                 {user?.name}
                 <IconButton
                   size="large"
@@ -112,9 +112,9 @@ export function Header() {
                 >
                   <MenuItem onClick={signOut}>Sair</MenuItem>
                 </Menu>
-              </ContainerLogout>
+              </>
             )}
-          </div>
+          </ContainerLogout>
         </ToolbarMenu>
       </AppBarMenu>
     </>
