@@ -28,8 +28,10 @@ import Head from "next/head";
 import useDisclosure from "../hooks/useDiscloure";
 import {
   createCharacter,
+  deleteCharacter,
   getAllCharacter,
 } from "../services/characterApi/character";
+import { toast } from "react-toastify";
 
 type IFilterData = {
   name: string;
@@ -88,8 +90,18 @@ export default function ListCharacters({
 
   const handleFavoriteCharacter = async (character: Character) => {
     try {
-      const created = await createCharacter(character);
-    } catch (err) {}
+      await createCharacter(character);
+    } catch (err) {
+      toast.error("Houve um erro ao favoritar o personagem");
+    }
+  };
+
+  const handleRemoveFavoriteCharacter = async (character: Character) => {
+    try {
+      await deleteCharacter({ id: Number(character.id) });
+    } catch (err) {
+      toast.error("Houve um erro ao desfavoritar o personagem");
+    }
   };
 
   return (
@@ -163,6 +175,9 @@ export default function ListCharacters({
                   }
                   onHandleSelectCharacter={() =>
                     handleOpenModalAndSelectCharacter(character)
+                  }
+                  onHandleRemoveFavorite={() =>
+                    handleRemoveFavoriteCharacter(character)
                   }
                 />
               );
