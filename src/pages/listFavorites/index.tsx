@@ -17,7 +17,7 @@ import {
   Content,
 } from "../../styles/pages/listFavorites";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import {
@@ -30,6 +30,7 @@ import { ModalCharacter } from "../../components/ModalCharacter";
 import { Character } from "../../domain/Character";
 import { Header } from "../../components/Header";
 import { CardCharacter } from "../../components/Card";
+import { withSSRAuth } from "../../utils/auth/withSSRAuth";
 
 type IFilterData = {
   name: string;
@@ -179,12 +180,14 @@ export default function ListFavorites({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const listMyCharFavorites = await getAllCharacter({ ctx });
+export const getServerSideProps: GetServerSideProps = withSSRAuth(
+  async (ctx: GetServerSidePropsContext) => {
+    const listMyCharFavorites = await getAllCharacter({ ctx });
 
-  return {
-    props: {
-      listMyCharFavorites: listMyCharFavorites ?? [],
-    },
-  };
-};
+    return {
+      props: {
+        listMyCharFavorites: listMyCharFavorites ?? [],
+      },
+    };
+  }
+);

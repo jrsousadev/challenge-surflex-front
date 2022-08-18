@@ -17,6 +17,7 @@ import Head from "next/head";
 import { toast } from "react-toastify";
 import { createUser } from "../../services/userApi/user";
 import Link from "next/link";
+import useAuth from "../../hooks/useAuth";
 
 type RegisterData = {
   name: string;
@@ -32,6 +33,7 @@ const registerSchema = yup
 
 export default function Register() {
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
 
   const {
     register,
@@ -46,8 +48,14 @@ export default function Register() {
 
     try {
       await createUser(data);
+      await signIn(data);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 4000);
     } catch (err) {
       toast.error("Nome de usuário ja existente");
+      setLoading(false);
     }
   }
 

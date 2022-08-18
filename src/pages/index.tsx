@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Container,
@@ -32,6 +32,9 @@ import {
   getAllCharacter,
 } from "../services/characterApi/character";
 import { toast } from "react-toastify";
+import useAuth from "../hooks/useAuth";
+import { parseCookies } from "nookies";
+import { getInfosDecodedToken } from "../utils/getInfosDecodedToken";
 
 type IFilterData = {
   name: string;
@@ -190,8 +193,20 @@ export default function ListCharacters({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ["challengeSurflex.token"]: token } = parseCookies(ctx);
+
+  let listMyCharFavorites = [];
+  let userId = null;
+
+  if (token) {
+    userId = await getInfosDecodedToken(token);
+  }
+
+  if (userId) {
+    listMyCharFavorites = await getAllCharacter({ ctx });
+  }
+
   const { results: listCharacters } = await getCharactersProd();
-  const listMyCharFavorites = await getAllCharacter({ ctx });
 
   return {
     props: {
