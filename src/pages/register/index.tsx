@@ -83,6 +83,7 @@ export default function Register() {
 
             <TextField
               label="Senha"
+              type="password"
               variant="outlined"
               error={!!errors?.password}
               {...register("password")}
