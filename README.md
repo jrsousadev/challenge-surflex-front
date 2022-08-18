@@ -1,4 +1,4 @@
-## 📋 Challenge Surflex 
+## 📋 Challenge Surflex Front-end
 
 Este projeto é um sistema que exibe a listagem de personagens da API do "Rick And Morty" além de registrar/logar um usuário e após autenticador permite o usuário criar uma lista com os seus personagens favoritos.
 
