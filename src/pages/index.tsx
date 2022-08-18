@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Container,
@@ -23,9 +23,13 @@ import { Header } from "../components/Header";
 import { Character } from "../domain/Character";
 import { CardCharacter } from "../components/Card";
 import { getCharactersProd } from "../services/characterProdApi/getCharactersProd";
-import Head from "next/head";
 import { ModalCharacter } from "../components/ModalCharacter";
+import Head from "next/head";
 import useDisclosure from "../hooks/useDiscloure";
+import {
+  createCharacter,
+  getAllCharacter,
+} from "../services/characterApi/character";
 
 type IFilterData = {
   name: string;
@@ -34,6 +38,7 @@ type IFilterData = {
 
 interface IListCharactersProps {
   listCharacters: Character[];
+  listMyCharFavorites: Character[];
 }
 
 const filterSchema = yup
@@ -45,6 +50,7 @@ const filterSchema = yup
 
 export default function ListCharacters({
   listCharacters,
+  listMyCharFavorites,
 }: IListCharactersProps) {
   const [listCharactersMain, setListCharactersMain] =
     useState<Character[]>(listCharacters);
@@ -78,6 +84,12 @@ export default function ListCharacters({
   const handleOpenModalAndSelectCharacter = (character: Character) => {
     setCharacterSelected(character);
     handleOpen();
+  };
+
+  const handleFavoriteCharacter = async (character: Character) => {
+    try {
+      const created = await createCharacter(character);
+    } catch (err) {}
   };
 
   return (
@@ -126,15 +138,35 @@ export default function ListCharacters({
           </Typography>
 
           <ContainerCards>
-            {listCharactersMain.map((character: Character) => (
-              <CardCharacter
-                key={character.id}
-                character={character}
-                onHandleSelectCharacter={() =>
-                  handleOpenModalAndSelectCharacter(character)
-                }
-              />
-            ))}
+            {listCharactersMain.map((character: Character) => {
+              const existCharFavorite = listMyCharFavorites.find(
+                (char: Character) => char.id === character.id
+              );
+
+              let isFavorite: boolean;
+              if (
+                existCharFavorite &&
+                typeof existCharFavorite !== "undefined"
+              ) {
+                isFavorite = true;
+              } else {
+                isFavorite = false;
+              }
+
+              return (
+                <CardCharacter
+                  isFavorite={isFavorite}
+                  key={character.id}
+                  character={character}
+                  onHandleAddedFavorite={() =>
+                    handleFavoriteCharacter(character)
+                  }
+                  onHandleSelectCharacter={() =>
+                    handleOpenModalAndSelectCharacter(character)
+                  }
+                />
+              );
+            })}
           </ContainerCards>
         </Content>
       </Container>
@@ -144,16 +176,12 @@ export default function ListCharacters({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { results: listCharacters } = await getCharactersProd();
-
-  if (!listCharacters) {
-    return {
-      props: { listCharacters: [] },
-    };
-  }
+  const listMyCharFavorites = await getAllCharacter({ ctx });
 
   return {
     props: {
-      listCharacters,
+      listCharacters: listCharacters ?? [],
+      listMyCharFavorites: listMyCharFavorites ?? [],
     },
   };
 };
