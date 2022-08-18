@@ -11,6 +11,8 @@ Este projeto é um sistema que exibe a listagem de personagens da API do "Rick A
 
 ### Recursos
 
+#### Projeto Mobile / Desktop
+
 #### Filtrar personagens por name e espécie
 
 ![image](https://user-images.githubusercontent.com/92350736/185425149-ab0bef59-f5cb-4ddc-a3ad-0b94eb6013de.png)
