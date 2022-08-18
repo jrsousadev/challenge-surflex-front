@@ -13,10 +13,7 @@ export const Content = styled("div")`
   }
 
   padding-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    padding-top: 3rem;
-  }
+  padding-top: 4rem;
 `;
 
 export const ContainerCards = styled("div")`

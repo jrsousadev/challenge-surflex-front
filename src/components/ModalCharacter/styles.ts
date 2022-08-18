@@ -7,8 +7,8 @@ type ModalProps = {
 
 export const Modal = styled("div")<ModalProps>`
   display: ${(props) => (props.isOpen ? "grid" : "none")};
-  width: 100vw;
-  height: 100vh;
+  width: 1000vw;
+  height: 1000vh;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9;
@@ -27,16 +27,25 @@ export const ContainerModal = styled("div")<ContainerModalProps>`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   height: 540px;
   background-color: #ffffff;
   border-radius: 5px;
+
+  @media (max-width: 340px) {
+    height: 580px;
+  }
 `;
 
 export const InfosContainer = styled("div")`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
+
+  @media (max-width: 340px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const CardComponent = styled("div")`

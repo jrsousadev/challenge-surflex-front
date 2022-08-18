@@ -7,6 +7,10 @@ type Props = {
 export const AppBarMenu = styled(AppBar)``;
 
 export const ContainerHeaderMobile = styled("div")<Props>`
+  @media (min-width: 768px) {
+    display: none;
+  }
+
   visibility: ${(props) => (props.isOpen ? "visibility" : "hidden")};
   height: ${(props) => (props.isOpen ? "100vh" : "0")};
   overflow-y: hidden;
@@ -15,7 +19,7 @@ export const ContainerHeaderMobile = styled("div")<Props>`
   position: fixed;
   width: 100vw;
   z-index: 10;
-  top: 55px;
+  top: 75px;
 `;
 
 export const OptionsHeaderMobile = styled("div")`

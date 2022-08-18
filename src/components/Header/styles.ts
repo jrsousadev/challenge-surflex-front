@@ -1,4 +1,4 @@
-import { Button, styled } from "@mui/material";
+import { styled } from "@mui/material";
 
 export const ToolbarMenu = styled("div")`
   display: grid;
@@ -6,6 +6,7 @@ export const ToolbarMenu = styled("div")`
   place-items: center;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 
   @media (max-width: 768px) {
     justify-content: left;
