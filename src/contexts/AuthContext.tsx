@@ -108,6 +108,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         created_at,
       });
 
+      Router.push("/");
       authChannel.postMessage("signIn");
     } catch (error) {
       throw error;
