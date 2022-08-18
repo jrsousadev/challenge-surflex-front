@@ -39,7 +39,7 @@ export function ModalCharacter({
   };
 
   const getSpecie = () => {
-    if (character.status === "Human") {
+    if (character.species === "Human") {
       return "Humano";
     }
 
