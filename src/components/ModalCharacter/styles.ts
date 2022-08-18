@@ -11,7 +11,7 @@ export const Modal = styled("div")<ModalProps>`
   height: 100vh;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 2;
+  z-index: 9;
   justify-content: center;
   place-items: center;
 `;
@@ -26,7 +26,7 @@ export const ContainerModal = styled("div")<ContainerModalProps>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 4;
+  z-index: 10;
   width: 500px;
   height: 540px;
   background-color: #ffffff;
