@@ -65,22 +65,18 @@ export default function ListFavorites({
 
   const filterCharacterByNameAndSpecie = async () => {
     const name = getValues("name");
-    const specie = getValues("specie");
+    const species = getValues("specie");
 
-    //TODO
-
-    /*
-    const response = await getCharactersFilterProd({
+    const listResults = await getAllCharacter({
       name,
-      specie,
+      species,
     });
 
-    if (!response.results) {
-      return setListCharactersMain([]);
+    if (!listResults) {
+      return setListFavorites([]);
     }
 
-    setListCharactersMain(response.results);
-    */
+    setListFavorites(listResults);
   };
 
   const handleOpenModalAndSelectCharacter = (character: Character) => {

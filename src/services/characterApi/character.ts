@@ -39,13 +39,19 @@ export const createCharacter = async (data: ICreateCharacter) => {
 
 interface IGetAllCharacter {
   ctx?: GetServerSidePropsContext | undefined;
+  name?: string;
+  species?: string;
 }
 
-export const getAllCharacter = async ({ ctx }: IGetAllCharacter) => {
+export const getAllCharacter = async ({
+  ctx,
+  name = "",
+  species = "",
+}: IGetAllCharacter) => {
   const api = GetCorrectApi(ctx);
 
   try {
-    const response = await api.get(GET_ALL_CHARACTERS);
+    const response = await api.get(GET_ALL_CHARACTERS(name, species));
     return response.data;
   } catch (err) {
     return err;
