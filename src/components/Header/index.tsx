@@ -1,21 +1,31 @@
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
-import { ToolbarMenu } from "./styles";
+import {
+  ContainerDiv,
+  ContainerLogout,
+  IconHamburg,
+  ToolbarMenu,
+} from "./styles";
+import { GiHamburgerMenu } from "react-icons/gi";
 import {
   AppBar,
   Button,
   IconButton,
   Menu,
   MenuItem,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
 import useAuth from "../../hooks/useAuth";
+import { HeaderMobile } from "../HeaderMobile";
+import useDisclosure from "../../hooks/useDiscloure";
+import { AppBarMenu } from "../HeaderMobile/styles";
 
 export function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user, isAuthenticated, signOut } = useAuth();
+
+  const { isOpen, handleToggle } = useDisclosure();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,83 +36,87 @@ export function Header() {
   };
 
   return (
-    <AppBar position="static">
-      <ToolbarMenu>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridGap: "10px",
-            placeItems: "center",
-          }}
-        >
-          <Link href="/" passHref>
-            <Typography variant="h6" component="div" sx={{ cursor: "pointer" }}>
-              Challenge Surflex
-            </Typography>
-          </Link>
+    <>
+      <HeaderMobile isOpen={isOpen} />
 
-          {isAuthenticated && (
-            <Link href="/listFavorites" passHref>
-              <Button
-                variant="outlined"
-                style={{ background: "#ffffff", color: "#000" }}
+      <AppBarMenu>
+        <ToolbarMenu>
+          <IconHamburg onClick={handleToggle}>
+            <GiHamburgerMenu size={23} />
+          </IconHamburg>
+          <ContainerDiv>
+            <Link href="/" passHref>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ cursor: "pointer" }}
               >
-                Minha lista de favoritos
-              </Button>
+                Challenge Surflex
+              </Typography>
             </Link>
-          )}
-        </div>
 
-        <div>
-          {!isAuthenticated && (
-            <Link href="/login" passHref>
-              <Button
-                variant="contained"
-                sx={{
-                  background: "#FFFFFF",
-                  color: "#000",
-                  fontWeight: "bold",
-                }}
-              >
-                Fazer login
-              </Button>
-            </Link>
-          )}
-          {isAuthenticated && (
-            <>
-              {user?.name}
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={signOut}>Sair</MenuItem>
-              </Menu>
-            </>
-          )}
-        </div>
-      </ToolbarMenu>
-    </AppBar>
+            {isAuthenticated && (
+              <Link href="/listFavorites" passHref>
+                <Button
+                  variant="outlined"
+                  style={{ background: "#ffffff", color: "#000" }}
+                >
+                  Minha lista de favoritos
+                </Button>
+              </Link>
+            )}
+          </ContainerDiv>
+
+          <div>
+            {!isAuthenticated && (
+              <Link href="/login" passHref>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "#FFFFFF",
+                    color: "#000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Fazer login
+                </Button>
+              </Link>
+            )}
+            {isAuthenticated && (
+              <ContainerLogout>
+                {user?.name}
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={signOut}>Sair</MenuItem>
+                </Menu>
+              </ContainerLogout>
+            )}
+          </div>
+        </ToolbarMenu>
+      </AppBarMenu>
+    </>
   );
 }
