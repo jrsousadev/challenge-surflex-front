@@ -119,7 +119,7 @@ export default function ListFavorites({
         <Header />
 
         <Content>
-          <Typography gutterBottom variant="h4">
+          <Typography gutterBottom variant="h5">
             Pesquisar personagem por:
           </Typography>
           <ContainerFilterCharacter>
@@ -144,10 +144,15 @@ export default function ListFavorites({
             </FormControl>
           </ContainerFilterCharacter>
 
-          <Typography gutterBottom variant="h4">
-            Lista de Personagens
+          <Typography gutterBottom variant="h5">
+            Lista de seus personagens favoritos
           </Typography>
 
+          {listFavorites.length <= 0 && (
+            <p style={{ textAlign: "center" }}>
+              Você não tem personagens favoritos
+            </p>
+          )}
           <ContainerCards>
             {listFavorites.map((character: Character) => {
               return (

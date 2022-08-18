@@ -35,9 +35,7 @@ export const FormWrapper = styled(Box)`
   }
   .button-wrapper {
     width: 100%;
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    display: grid;
+    grid-gap: 10px;
   }
 `;

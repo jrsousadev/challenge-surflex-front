@@ -7,12 +7,16 @@ export const Content = styled("div")`
     margin-top: 1.1rem;
   }
 
-  h4 {
+  h5 {
     text-align: center;
     padding-top: 3rem;
   }
 
   padding-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    padding-top: 3rem;
+  }
 `;
 
 export const ContainerCards = styled("div")`
@@ -22,6 +26,14 @@ export const ContainerCards = styled("div")`
   place-items: center;
   grid-template-columns: repeat(3, 350px);
   grid-gap: 10px;
+
+  @media (max-width: 1120px) {
+    grid-template-columns: repeat(2, 350px);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 350px;
+  }
 `;
 
 export const ContainerFilterCharacter = styled("div")`
@@ -34,4 +46,9 @@ export const ContainerFilterCharacter = styled("div")`
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   place-items: center;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 300px;
+    grid-gap: 10px;
+  }
 `;

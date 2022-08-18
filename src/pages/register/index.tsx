@@ -16,6 +16,7 @@ import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { createUser } from "../../services/userApi/user";
+import Link from "next/link";
 
 type RegisterData = {
   name: string;
@@ -89,6 +90,12 @@ export default function Register() {
                 "Registrar"
               )}
             </Button>
+
+            <Link href="/login" passHref>
+              <Button variant="outlined" fullWidth>
+                Já tenho uma conta
+              </Button>
+            </Link>
           </Box>
         </FormWrapper>
       </Container>

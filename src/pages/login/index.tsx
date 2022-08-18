@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { withSSRAuthLogged } from "../../utils/auth/withSSRAuthLogged";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 type LoginData = {
   name: string;
@@ -93,6 +94,12 @@ export default function Login() {
                 "Login"
               )}
             </Button>
+
+            <Link href="/register" passHref>
+              <Button variant="outlined" fullWidth>
+                Não tenho conta
+              </Button>
+            </Link>
           </Box>
         </FormWrapper>
       </Container>

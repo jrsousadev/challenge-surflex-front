@@ -120,7 +120,7 @@ export default function ListCharacters({
         <Header />
 
         <Content>
-          <Typography gutterBottom variant="h4">
+          <Typography gutterBottom variant="h5">
             Pesquisar personagem por:
           </Typography>
           <ContainerFilterCharacter>
@@ -145,7 +145,7 @@ export default function ListCharacters({
             </FormControl>
           </ContainerFilterCharacter>
 
-          <Typography gutterBottom variant="h4">
+          <Typography gutterBottom variant="h5">
             Lista de Personagens
           </Typography>
 
