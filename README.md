@@ -19,6 +19,10 @@ Este projeto é um sistema que exibe a listagem de personagens da API do "Rick A
 
 ![image](https://user-images.githubusercontent.com/92350736/185426018-43ec274d-6800-4671-8944-5475bea48886.png)
 
+#### Após favoritar seus personagens, ele entraram na sua lista de favoritos (Podendo também desfavorita-los)
+
+![image](https://user-images.githubusercontent.com/92350736/185426349-5108475e-aada-4abc-b3ad-b2904f70ab13.png)
+
 ### Iniciando o Projeto
 
 **1-** Clone repository.
