@@ -155,7 +155,8 @@ export default function ListCharacters({
           <ContainerCards>
             {listCharactersMain.map((character: Character) => {
               const existCharFavorite = listMyCharFavorites.find(
-                (char: Character) => char.id === character.id
+                (char: Character) =>
+                  char.name === character.name && char.image === character.image
               );
 
               let isFavorite: boolean;
